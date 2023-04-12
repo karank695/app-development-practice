@@ -39,11 +39,12 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(passport.setAuthenticatedUser);
+app.use(passport.setAuthenticatedUser);
 //different router for accepting request
 app.use('/', require('./routers/homeRouter'));
 app.use('/', require('./routers/aboutRouter'));
-app.use('/', require('./routers/userRouter'))
+app.use('/', require('./routers/userRouter'));
+app.use('/', require('./routers/postRouter'));
 app.listen(8000, () => {
     console.log(`I am listening at port ${port}`);
 })
