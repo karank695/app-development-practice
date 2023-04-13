@@ -31,7 +31,8 @@ app.use(session({
     resave: false,
     cookie: {
         maxAge: (1000 * 60 * 100)
-    },
+    }
+    ,
       store: MongoStore.create({
           mongoUrl: 'mongodb://localhost/users_db',
           autoRemove: 'disabled' // Default
@@ -41,10 +42,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 //different router for accepting request
-app.use('/', require('./routers/homeRouter'));
-app.use('/', require('./routers/aboutRouter'));
+// app.use('/', require('./routers/homeRouter'));
 app.use('/', require('./routers/userRouter'));
-app.use('/', require('./routers/postRouter'));
+// app.use('/', require('./routers/postRouter'));
 app.listen(8000, () => {
     console.log(`I am listening at port ${port}`);
 })

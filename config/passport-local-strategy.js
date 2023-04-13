@@ -39,15 +39,18 @@ passport.deserializeUser(function (id, done) {
     User.findById(id).then((user) => {
         return done(null, user);
     }).catch((err) => {
-            console.log("error in finding user==>passport");
-            return done(err);
-    })
+        console.log("error in finding user==>passport");
+        return done(err);
+    });
 })
 
 //check if the user is authenticated
 passport.checkAuthentication = function (req, res, next) {
     //if the user is signed in ,then pass on the req to next function (controller actions)
     if (req.isAuthenticated()) {
+                console.log('deseria');
+        console.log(req.user);
+        console.log('deseria');
         return next();
     }
     return res.redirect('/signin');

@@ -1,10 +1,15 @@
 const User = require('../models/user');
+module.exports.about = (req, res) => {
+    return res.render('about', {
+        title: "about"
+    });
+}
 //signup page rendering
 module.exports.signup = (req, res) => {
     if (req.isAuthenticated()) {
         return res.redirect('/about');
     }
-    res.render('signup', {
+    return res.render('signup', {
         title: "sign_up"
     });
 }
@@ -13,7 +18,7 @@ module.exports.signin = (req, res) => {
     if (req.isAuthenticated()) {
         return res.redirect('/about');
     }
-    res.render('signin', {
+    return res.render('signin', {
         title: 'sign_in'
     });
 }
@@ -27,18 +32,15 @@ module.exports.createUser = (req, res) => {
         email: req.body.email
     }).then((user) => {
         if (user.length > 0) {
-            console.log(user);
             return res.redirect('/signin');
 
         } else {
             // res.send('user created');
-            console.log(req.body);
             User.create({
                 email: req.body.email,
                 password: req.body.password,
                 name: req.body.name
             }).then((data) => {
-                console.log(data);
                 return res.render('signin', {
                     title: "session-creation"
                 });
@@ -59,5 +61,5 @@ module.exports.createSession = (req, res) => {
 }
 module.exports.signout = (req, res) => {
     res.clearCookie('codial');
-    res.redirect('/signup');
+    res.redirect('/signin');
 }
