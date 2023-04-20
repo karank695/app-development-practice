@@ -10,6 +10,7 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const MongoStore = require('connect-mongo');
 const User = require('./models/user');
+const flash = require('connect-flash');
 //middleware for parsing body
 app.use(express.urlencoded({ extended: true }));
 //middleware for cookieParser
@@ -40,6 +41,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 app.use(passport.setAuthenticatedUser);
 //different router for accepting request
 // app.use('/', require('./routers/homeRouter'));
